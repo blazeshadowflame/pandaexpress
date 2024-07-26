@@ -1,0 +1,69 @@
+CREATE TABLE item (
+    item_id INTEGER PRIMARY KEY,
+    item_name VARCHAR2(34),
+    item_description VARCHAR2(100)
+);
+
+CREATE TABLE time (
+    time_id INTEGER PRIMARY KEY,
+    time_month INTEGER,
+    time_day INTEGER,
+    time_year INTEGER,
+    time_hour INTEGER
+);
+
+CREATE TABLE location (
+    location_id INTEGER PRIMARY KEY,
+    state_name VARCHAR2(32),
+    city_name VARCHAR2(32)
+);
+
+CREATE TABLE sales (
+    sales_id INTEGER PRIMARY KEY,
+    time_id INTEGER,
+    item_id INTEGER,
+    location_id INTEGER,
+    meal_type VARCHAR2(10),
+    total_sales INTEGER,
+    payment_method VARCHAR2(10),
+    FOREIGN KEY (time_id) REFERENCES time(time_id),
+    FOREIGN KEY (item_id) REFERENCES item(item_id),
+    FOREIGN KEY (location_id) REFERENCES location(location_id)
+);
+
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(1, 'Orange Chicken', 'Crispy chicken wok-tossed in a sweet and spicy orange sauce');
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(2, 'Kung Pao Chicken', 'Spicy stir-fry dish with chicken, peanuts, vegetables, and chili peppers');
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(3, 'Beijing Beef', 'Crispy beef, bell peppers, and onions in a sweet-tangy sauce');
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(4, 'Super Greens', 'A healthful mix of broccoli, kale, and cabbage');
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(5, 'Chow Mein', 'Stir-fried wheat noodles with onions, celery and cabbage');
+INSERT INTO item (item_id, item_name, item_description) VALUES
+(6, 'Double Teriyaki Chicken', 'Grilled chicken with teriyaki sauce');
+
+
+INSERT INTO time (time_id, time_month, time_day, time_year, time_hour) VALUES
+(1, 4, 15, 2022, 14);  -- 2 PM on the 15th
+INSERT INTO time (time_id, time_month, time_day, time_year, time_hour) VALUES
+(2, 4, 15, 2022, 15);  -- 3 PM on the 15th
+INSERT INTO time (time_id, time_month, time_day, time_year, time_hour) VALUES
+(3, 4, 15, 2022, 16);  -- 4 PM on the 15th
+
+
+INSERT INTO location (location_id, state_name, city_name) VALUES
+(1, 'California', 'San Jose');
+INSERT INTO location (location_id, state_name, city_name) VALUES
+(2, 'Nevada', 'Las Vegas');
+INSERT INTO location (location_id, state_name, city_name) VALUES
+(3, 'Texas', 'Houston');
+
+
+INSERT INTO sales (sales_id, time_id, item_id, location_id, meal_type, total_sales, payment_method) VALUES
+(1, 1, 1, 1, 'Lunch', 150, 'Credit');  -- Orange Chicken
+INSERT INTO sales (sales_id, time_id, item_id, location_id, meal_type, total_sales, payment_method) VALUES
+(2, 2, 5, 1, 'Lunch', 200, 'Cash');    -- Chow Mein
+INSERT INTO sales (sales_id, time_id, item_id, location_id, meal_type, total_sales, payment_method) VALUES
+(3, 3, 6, 1, 'Lunch', 180, 'Credit');  -- Double Teriyaki Chicken

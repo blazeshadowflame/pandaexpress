@@ -1,0 +1,29 @@
+Questions
+How much orange chicken and chow mein is sold on 15th of every month from 2PM-4PM at the San Jose State location?
+How much revenue is made off of teriyaki chicken during midterms of the Fall Semester at the San Jose State location?
+
+
+
+1.	SELECT SUM(s.total_sales) AS total_sales
+FROM sales s
+JOIN item i ON s.item_id = i.item_id
+JOIN time t ON s.time_id = t.time_id
+JOIN location l ON s.location_id = l.location_id
+WHERE i.item_name IN ('Orange Chicken', 'Chow Mein')
+  AND t.time_day = 15
+  AND t.time_hour BETWEEN 14 AND 16
+  AND l.city_name = 'San Jose'
+  AND l.state_name = 'California';
+
+
+
+2.	SELECT SUM(s.total_sales) AS total_revenue
+FROM sales s
+JOIN item i ON s.item_id = i.item_id
+JOIN time t ON s.time_id = t.time_id
+JOIN location l ON s.location_id = l.location_id
+WHERE i.item_name = 'Teriyaki Chicken'
+  AND t.time_month = 10
+  AND t.time_day BETWEEN 14 AND 18
+  AND l.city_name = 'San Jose'
+  AND l.state_name = 'California';
